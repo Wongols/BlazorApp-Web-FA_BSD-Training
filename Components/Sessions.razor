@@ -1,0 +1,149 @@
+﻿@page "/sessions"
+@using BlazorApp_FA_BSD_Training.Models
+@using BlazorApp_FA_BSD_Training.Services
+@inject ISessionDbService service 
+@inject IJSRuntime jsRuntime
+@using BlazorApp_FA_BSD_Training.Data
+ 
+@using Microsoft.AspNetCore.Identity
+ 
+@inject IJSRuntime jsRuntime
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<IdentityUser> UserManager
+
+    <PageTitle>Sessions</PageTitle>
+<h1>Web Fund Administration BSD Sessions</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@*
+    <Swing Color="#e60000" Size="100px"/>
+    *@
+
+<div>
+<input type="button" data-target="#sessionModal" data-toggle="modal"  class="btn btn-secondary" style='float:right'
+value="Add New Session" @onclick="(()=>LoadSessionModalWithCurrentDate())" />
+</div>
+
+
+
+
+@if (sessions == null)
+{
+    <p><em> <Swing Color="#e60000" Size="100px"/>Loading...</em></p>
+}
+else
+{
+
+ 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Knowledge Base</th>
+                <th>Link IT help ticket</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var session in sessions)
+            {
+                <tr>
+                    <td>@session.Id</td>
+                    <td>@session.Title</td>
+                    <td>@session.Date</td>
+                    <td>@session.Duration</td>
+                    <td>@session.Knowledge_Base</td>
+                    <td>@session.Link_IT_help_ticket</td>
+                    <td><input type="button" class="btn btn-outline-secondary" data-target="#sessionModal" data-toggle="modal" value="Edit" 
+                        @onclick="(()=>LoadForEdit(session))"     /></td>
+                    
+              @*      <td><input type="button" class="btn btn-danger" value="Delete" data-toggle="modal" data-target="#confirmDeleteModal"
+                        @onclick="(()=>PrepareforDelete(session))" /></td>
+                *@   
+         
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+
+
+<SessionDetail SessionObject="sessionObject" OnSave="@Refreshed">
+    <CustomHeader>@customTitle</CustomHeader>
+
+</SessionDetail>
+
+}
+<ConfirmDelete OnClick="@DeleteSession"></ConfirmDelete>
+
+@code {
+    private List<Session> sessions;
+    Session sessionObject = new Session();
+    string customTitle = string.Empty;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        sessions = await service.GetSessions();
+    }
+
+
+    private void LoadSessionModalWithCurrentDate()
+    {
+        customTitle = "Add New Session details";
+        sessionObject.Date = DateTime.Now;
+    }
+
+
+
+
+
+    //private void InitializeSessionObject()
+    //
+    //{
+    //
+    //    sessionObject.Date = DateTime.Now;
+    //}
+
+
+
+
+
+
+    private async Task<List<Session>> Refreshed()
+
+    {
+        sessions = await service.GetSessions();
+        return sessions;
+
+    }
+    private void LoadForEdit(Session session)
+    {
+
+        sessionObject = session;
+        customTitle = "Edit Session details";
+
+    }
+
+
+    private void PrepareforDelete(Session session)
+    {
+
+        sessionObject = session;
+        customTitle = "Edit Session details";
+
+    }
+
+
+    private async Task DeleteSession()
+
+    {
+        var session = await service.DeleteSession(sessionObject.Id);
+        await jsRuntime.InvokeAsync<object>("HideModal", "ConfirmDeleteModal");
+        sessions = await service.GetSessions();
+    }
+
+}

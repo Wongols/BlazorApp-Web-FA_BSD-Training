@@ -1,0 +1,26 @@
+﻿@page "/BlogPosts"
+@using BlazorApp_FA_BSD_Training.Data
+@inject BlogPostService blogPostService
+
+
+<h3>BlogPosts</h3>
+
+<h1>Blog Posts</h1>
+<p>This is the blogposts page</p>
+<div>
+    @foreach (var blogpost in @blogPosts)
+    {
+        <h2>@blogpost.Title</h2>
+        <i>@blogpost.Category - @blogpost.Author - @blogpost.DateCreated</i>
+        <p>@blogpost.Content</p>
+    }
+</div>
+@code{
+
+    private List<Data.BlogPost> blogPosts = new ();
+
+    protected override async Task OnInitializedAsync()
+    {
+        blogPosts = await blogPostService.GetBlogPosts();
+    }
+}   

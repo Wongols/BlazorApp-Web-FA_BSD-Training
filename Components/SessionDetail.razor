@@ -1,0 +1,109 @@
+﻿@using BlazorApp_FA_BSD_Training.Data
+@using BlazorApp_FA_BSD_Training.Services
+@using BlazorApp_FA_BSD_Training.Models
+@inject ISessionDbService service
+@inject IJSRuntime jsRuntime
+@inject AuthenticationStateProvider AuthenticationStateProvider
+ 
+
+
+
+<div class="modal" tabindex="-1" id="sessionModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@CustomHeader</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+             </div>
+        <div class="modal-body">
+            <EditForm Model="@SessionObject" OnValidSubmit ="@HandleValidSubmit">
+
+
+
+                <div class="form-group">
+                    <label for="sessionTitle">Title</label>
+                    <input type="hidden" @bind-value="@SessionObject.Id" />
+                    <InputText id="Title" class="form-control" @bind-Value ="@SessionObject.Title"/>
+                </div>
+                 <br />
+                        <div class="form-group">
+                    <label for="sessionDate">Date</label>
+                    <InputDate id="Date" @bind-Value ="@SessionObject.Date"/>
+                    </div>
+                     <br />
+
+                        <div class="form-group">
+                    <label for="sessionDuration"> Duration</label>
+                    <InputNumber id="Duration" class="form-control"@bind-Value ="@SessionObject.Duration"/>
+                    </div>
+                     <br />
+                        <div class="form-group">
+                    <label for="sessionKnowledge_Base"> Knowledge Base</label>
+                    <InputText id="Duration" class="form-control"@bind-Value ="@SessionObject.Knowledge_Base"/>
+                    </div>
+                     <br />
+                        <div class="form-group">
+                    <label for="sessionLink_IT_help_ticket">Link IT Help Ticket</label>
+                    <InputText id="Duration" class="form-control"@bind-Value ="@SessionObject.Link_IT_help_ticket"/>
+                    </div>
+
+
+                   
+
+                    <br />
+                    <button type="submit" class="btn btn-danger">Submit</button>&ensp;
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                    <DataAnnotationsValidator/>
+                    <ValidationSummary/>
+
+                    
+                </EditForm>
+
+        </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public Session SessionObject { get; set;}
+
+
+    [Parameter]
+
+    public EventCallback<Session> OnSave { get; set; }
+
+    [Parameter]
+    public RenderFragment CustomHeader { get; set; }
+
+
+
+
+    private async Task HideTaskModal()
+    {
+        await jsRuntime.InvokeAsync<object>("HideModal", "sessionModal");
+    }
+
+    private async void HandleValidSubmit()
+
+    {
+        if(SessionObject.Id==0)
+        {
+
+            await service.AddSession(SessionObject);
+        }
+        else
+
+        {
+            await service.EditSession(SessionObject);
+
+        }
+
+            //await service.AddSession(SessionObject);
+        await HideTaskModal();
+        await OnSave.InvokeAsync(SessionObject);
+    }
+}

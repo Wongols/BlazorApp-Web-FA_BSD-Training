@@ -1,0 +1,55 @@
+﻿@page "/Feedback"
+@using BlazorApp_FA_BSD_Training.Models
+@using BlazorApp_FA_BSD_Training.Services
+@inject ISessionDbService service 
+@inject IJSRuntime jsRuntime
+@using BlazorApp_FA_BSD_Training.Data
+ 
+@using Microsoft.AspNetCore.Identity
+@using Syncfusion.Blazor.Notifications
+@using Syncfusion.Blazor.Buttons
+ 
+@inject IJSRuntime jsRuntime
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<IdentityUser> UserManager
+
+    <PageTitle>Feedback</PageTitle>
+<h1>Feedback List</h1>
+
+<p>Page is currently under construction. Please try again later. Thanks for your patience</p>
+ <Grid Color="#e60000" Size="100px"/>
+
+ <BlazorApp_FA_BSD_Training.Pages.FetchData/>
+ <BlazorApp_FA_BSD_Training.Pages.BlogPosts/>
+
+ @*
+<SfButton @onclick="ShowOnClick"> Show Toasts
+</SfButton>
+
+<SfToast Title = "Test" Content="@ToastContent"
+@ref="ToastObj"></SfToast>
+
+@code {
+
+    
+
+SfToast ToastObj;
+public String ToastContent { get; set;}
+= "Test tes test";
+private void ShowOnClick()
+
+{
+this.ToastObj.Show();
+}
+
+
+
+}
+*@
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp-FA_BSD-Training", "BlazorApp-FA_BSD-Training.csproj", "{CD99FC4D-0DEB-4E2C-8958-269174BDCEFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA_BSD_API", "..\FA_BSD_API\FA_BSD_API.csproj", "{6C4A6947-6967-4AAB-B554-21769C88854E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD99FC4D-0DEB-4E2C-8958-269174BDCEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD99FC4D-0DEB-4E2C-8958-269174BDCEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD99FC4D-0DEB-4E2C-8958-269174BDCEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD99FC4D-0DEB-4E2C-8958-269174BDCEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C4A6947-6967-4AAB-B554-21769C88854E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C4A6947-6967-4AAB-B554-21769C88854E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C4A6947-6967-4AAB-B554-21769C88854E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C4A6947-6967-4AAB-B554-21769C88854E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BABC5015-3371-4CE1-9B79-73CDCEF05BB6}
+	EndGlobalSection
+EndGlobal

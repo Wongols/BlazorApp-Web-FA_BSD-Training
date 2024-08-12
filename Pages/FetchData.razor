@@ -1,0 +1,59 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Web Fund Admin BSD Wiki Pages!</PageTitle>
+
+@using BlazorApp_FA_BSD_Training.Data
+@inject WeatherForecastService ForecastService
+
+
+
+
+<h1>Web Fund Admin BSD Wiki Pages!</h1>
+
+<h2><p>Here is a list of some very useful sites to visit!! </p></h2>
+
+
+
+<h4><a href="https://www.mpms.mufg.com/">Our MPMS public homepage</a></h4>
+<br />
+<h4><a href="https://linkhub.sharepoint.com/sites/intrag">The MPMS Intranet</a></h4>
+
+
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}
