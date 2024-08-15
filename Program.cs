@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 
+using Syncfusion.Blazor;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,6 +24,10 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+
+builder.Services.AddSyncfusionBlazor();
+
+
 //Add the Data Access Service
 builder.Services.AddTransient<ISessionDbService, SessionDbService>();
 
@@ -30,7 +36,7 @@ builder.Services.AddTransient<ISessionDbService, SessionDbService>();
 builder.Services.AddSingleton<BlogPostService>();
 
 //builder.Services.AddHttpClient<BlogPostService>(options => {
-//    options.BaseAddress = new Uri("https://data.gov.au/data/api/3/action/datastore_search?resource_id=69453283-be14-4959-8705-81b2360c0723&limit=5");
+//    options.BaseAddress = new Uri("https://catfact.ninja/fact");
 //});
 
 var app = builder.Build();

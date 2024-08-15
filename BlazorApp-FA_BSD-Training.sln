@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp-FA_BSD-Training", "BlazorApp-FA_BSD-Training.csproj", "{CD99FC4D-0DEB-4E2C-8958-269174BDCEFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA_BSD_API", "..\FA_BSD_API\FA_BSD_API.csproj", "{6C4A6947-6967-4AAB-B554-21769C88854E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FA_BSD_API", "..\FA_BSD_API\FA_BSD_API.csproj", "{6C4A6947-6967-4AAB-B554-21769C88854E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

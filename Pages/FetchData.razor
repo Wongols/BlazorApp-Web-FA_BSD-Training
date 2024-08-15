@@ -18,7 +18,7 @@
 <br />
 <h4><a href="https://linkhub.sharepoint.com/sites/intrag">The MPMS Intranet</a></h4>
 
-
+@*
 
 @if (forecasts == null)
 {
@@ -48,8 +48,46 @@ else
         </tbody>
     </table>
 }
+*@
 
+<br />
+<br />
+  <h1>Cat facts!!</h1>
+Click here to receive some cat facts! <br />
+(This Services demostrates to use of consuming Open APIs)
+ <br /> <br />
+
+
+<input type="button" data-target="#sessionModal" data-toggle="modal"  class="btn btn-danger" style='float:Left'
+value=" Get Cat facts" @onclick="GetData" />
+
+@if (todo != null)
+{
+  <br />  <br /> <br />
+<p><B>Fact: @todo.fact</b></p>
+    <br /> <p>Click again to receive another interesting fact!</p>
+
+}
 @code {
+    public Todo todo;
+    public HttpClient httpClient = new HttpClient();
+
+    public async Task GetData()
+    {
+        todo = await httpClient.GetFromJsonAsync<Todo>("https://catfact.ninja/fact");
+
+
+    }
+
+    public class Todo
+
+    {
+        public string fact { get; set;}
+         public int length { get; set;}
+    }
+
+
+
     private WeatherForecast[]? forecasts;
 
     protected override async Task OnInitializedAsync()

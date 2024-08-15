@@ -1,0 +1,48 @@
+﻿@page "/Funnys"
+ 
+
+ <h1>For fun and laughs!</h1>
+
+<br />
+<br />
+ 
+Want to hear a joke? <br />
+(This Services demostrates to use of consuming Open Public APIs)
+ <br /> <br />
+
+
+<input type="button" class="btn btn-danger" style='float:Left'
+value="Tell me a joke" @onclick="GetDatas" />
+
+@if (todos != null)
+{
+  <br />  <br /> <br />
+<p><B>Question: @todos.setup</b></p>
+    <p><B>Answer: @todos.punchline</b></p>
+    <br /> <p>Click again to receive another joke</p>
+
+}
+@code {
+    public Todos todos;
+    public HttpClient httpClient = new HttpClient();
+
+    public async Task GetDatas()
+    {
+        todos = await httpClient.GetFromJsonAsync<Todos>("https://official-joke-api.appspot.com/random_joke");
+
+
+    }
+
+    public class Todos
+
+    {
+        public string type { get; set;}
+        public string setup { get; set;}
+         public string punchline { get; set;}
+         public int id { get; set;}
+    }
+
+
+
+ 
+}

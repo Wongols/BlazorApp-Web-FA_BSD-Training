@@ -1,5 +1,5 @@
-﻿/*
-
+﻿
+/*
 using System.Net.Http;
 
 namespace BlazorApp_FA_BSD_Training.Data;
@@ -19,10 +19,10 @@ public class BlogPostService
         return await _httpClient.GetFromJsonAsync<List<BlogPost>>("/BlogPosts");
     }
 }
+
+
+
 */
-
-
-
 
 namespace BlazorApp_FA_BSD_Training.Data;
 
@@ -51,3 +51,4 @@ namespace BlazorApp_FA_BSD_Training.Data;
 
     }
 }
+    
