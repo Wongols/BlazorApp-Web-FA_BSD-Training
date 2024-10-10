@@ -1,9 +1,11 @@
 ﻿@using BlazorApp_FA_BSD_Training.Data
 @using BlazorApp_FA_BSD_Training.Services
 @using BlazorApp_FA_BSD_Training.Models
+@using Microsoft.AspNetCore.Identity
 @inject ISessionDbService service
 @inject IJSRuntime jsRuntime
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IToastService toastService
  
 
 
@@ -52,7 +54,18 @@
                    
 
                     <br />
-                    <button type="submit" class="btn btn-danger">Submit</button>&ensp;
+
+
+
+
+@*
+<button class="btn btn-info" @onclick="@(()=> toastService.ShowInfo("Info Message"))">Info Toast</button>
+<button class="btn btn-success" @onclick="@(()=> toastService.ShowSuccess("Success Message"))">Success Toast</button>
+*@
+
+                    <button type="submit" class="btn btn-danger" 
+                    @onclick="@(()=> toastService.ShowSuccess("Succesfully updated"))" 
+                    data-save="modal">Submit</button>&ensp;
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 
                     <DataAnnotationsValidator/>
@@ -68,8 +81,22 @@
 
 @code {
 
+   //  private async Task HideContentAsync() => await SessionObject.HideAsync();
+
+
     [Parameter]
-    public Session SessionObject { get; set;}
+    public Session SessionObject { get; set; }
+      private async Task HideTaskModal()
+    {
+
+    
+
+        await jsRuntime.InvokeAsync<object>("HideModal", "sessionModal");
+ 
+
+         
+
+    }
 
 
     [Parameter]
@@ -82,23 +109,23 @@
 
 
 
-    private async Task HideTaskModal()
-    {
-        await jsRuntime.InvokeAsync<object>("HideModal", "sessionModal");
-    }
+  
 
     private async void HandleValidSubmit()
 
     {
+       
         if(SessionObject.Id==0)
         {
 
             await service.AddSession(SessionObject);
+            await HideTaskModal();
         }
         else
 
         {
             await service.EditSession(SessionObject);
+           
 
         }
 

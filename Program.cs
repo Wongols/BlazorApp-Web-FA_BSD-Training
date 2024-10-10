@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Blazored.Toast;
+using Blazored.Toast.Services;
+ 
+
 
 using Syncfusion.Blazor;
 
@@ -26,10 +30,15 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 
 builder.Services.AddSyncfusionBlazor();
+builder.Services.AddSingleton<ToDoService>();
 
+
+//await builder.Build().RunAsync();
 
 //Add the Data Access Service
 builder.Services.AddTransient<ISessionDbService, SessionDbService>();
+
+builder.Services.AddBlazoredToast();
 
 
 //Add the Data Access BlogPostService
@@ -52,6 +61,18 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+
+ 
+
+ 
+
+
+
+
+
+
+
 
 app.UseHttpsRedirection();
 

@@ -1,0 +1,68 @@
+﻿@page "/ToDo"
+@inject ToDoService ToDoService
+
+@using BlazorApp_FA_BSD_Training.Models
+@using BlazorApp_FA_BSD_Training.Services
+
+
+
+
+
+<h1>To-Do List</h1>
+<br />
+
+Please enter your list of items that you need to do for today.
+<br /><br />
+@*
+<input @bind="newTaskTitle" placeholder="Enter a new task" />
+<button @onclick="AddTask">Add Task</button>
+*@
+
+<div>
+
+   <input @bind="newTaskTitle" placeholder="Enter a new task" />
+<br />
+<br />
+<input type="button"      class="btn btn-secondary" style='float:left'
+  @onclick="AddTask" value="Add Task" />
+</div>
+
+
+ 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<ul>
+    @foreach (var task in ToDoService.GetTasks())
+    {
+        <li>
+            <input type="checkbox" @bind="task.IsDone" />
+            @task.Title &ensp;  &ensp; <br>
+            <button @onclick="() => RemoveTask(task)">Remove</button>
+            <br> <br>
+        </li>
+    }
+</ul>
+
+@code {
+    private string newTaskTitle;
+
+    private void AddTask()
+    {
+        if (!string.IsNullOrWhiteSpace(newTaskTitle))
+        {
+            ToDoService.AddTask(new ToDoItem { Title = newTaskTitle });
+            newTaskTitle = string.Empty;
+        }
+    }
+
+    private void RemoveTask(ToDoItem task)
+    {
+        ToDoService.RemoveTask(task);
+    }
+}
+

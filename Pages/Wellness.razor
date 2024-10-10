@@ -1,5 +1,5 @@
-﻿@page "/Funnys"
- 
+﻿@page "/Wellness"
+ @inject HttpClient Http
 
  <h1>For fun and laughs!</h1>
 
@@ -7,34 +7,63 @@
 <br />
  
 Want to hear a joke? <br />
-(This Services demostrates to use of consuming Open Public APIs)
+(This Services demostrates the use of consuming Open Public APIs)
  <br /> <br />
 
-
+ <p role="status">Joke Number: @currentCount</p>
 <input type="button" class="btn btn-danger" style='float:Left'
 value="Tell me a joke" @onclick="GetDatas" />
 
+
+
+
 @if (todos != null)
 {
+   
+
+    @foreach (var todo in todos) 
+    { 
+        <br />  <br /> <br />
+        <p><b>Question: @todo.setup</b></p>
+        <p><b>Answer:  @todo.punchline</b></p>
+    }
+
+   
+    @*
   <br />  <br /> <br />
 <p><B>Question: @todos.setup</b></p>
     <p><B>Answer: @todos.punchline</b></p>
     <br /> <p>Click again to receive another joke</p>
+    *@
+
 
 }
 @code {
-    public Todos todos;
+    private Todos[] todos;
     public HttpClient httpClient = new HttpClient();
-
+   private int currentCount = 0;
     public async Task GetDatas()
     {
+        
+
+      
+         todos = await Http.GetFromJsonAsync<Todos[]>("https://official-joke-api.appspot.com/jokes/programming/random");
+              currentCount++;
+        
+        @*
         todos = await httpClient.GetFromJsonAsync<Todos>("https://official-joke-api.appspot.com/random_joke");
 
 
+        GetFromJsonAsync
+
+        --https://official-joke-api.appspot.com/jokes/programming/random
+        --https://official-joke-api.appspot.com/random_joke
+        *@
     }
 
     public class Todos
 
+    
     {
         public string type { get; set;}
         public string setup { get; set;}
@@ -42,7 +71,12 @@ value="Tell me a joke" @onclick="GetDatas" />
          public int id { get; set;}
     }
 
+    
 
+    
+
+  
+}
 
  
-}
+

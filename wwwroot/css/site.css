@@ -2,9 +2,17 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Add these */
+    max-width: 100%;
+ 
 }
 
-
+.nav-link:focus {
+    background-color: red;
+}
 
 
 h1 {
@@ -69,3 +77,20 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.image-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center
+}
+
+
+app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Add these */
+    max-width: 75%;
+   
+}

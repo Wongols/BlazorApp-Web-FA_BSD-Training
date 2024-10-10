@@ -4,10 +4,18 @@
 @inject ICompositeViewEngine Engine
 <!DOCTYPE html>
 <html>
+
+        <style>
+        header {background-color: #5A5A5A;color: white;}
+        body {background-color:     white;color: #5A5A5A;}
+        footer {background-image:linear-gradient(90deg, hsla(356, 77%, 38%, 1) 0%, hsla(356, 89%, 45%, 1) 100%);color:white;}
+    </style>
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BlazorApp-FA_BSD-Training</title>
+    <title>@ViewData["Title"] Web FA BSD Training</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.css" />
@@ -24,11 +32,7 @@
 
         
         
-    <style>
-        header {background-color: #E60000;color: white;}
-        body {background-color:     #E60000;color: white;}
-        footer {background-color:   #E60000; color: floralwhite;}
-    </style>
+
 
 
 </head>
@@ -39,14 +43,14 @@
 
 
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-white bg-grey color-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" href="~/">BlazorApp-FA_BSD-Training</a>
+                <a class="navbar-brand text-white" href="~/">Web FA BSD Training</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="Toggle navigation" style="color:white">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="color:white">
                     @{
                         var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
                     }
@@ -76,8 +80,8 @@
 
 
 
-        <div class="container">
-        &copy; 2024 - BlazorApp-FA_BSD-Training
+        <div class="containers" style = "color: white" align="center">
+        <centre>&copy; 2024 - Web FA BSD Training</centre>
             @{
                 var foundPrivacy = Url.Page("/Privacy", new { area = "" });
             }
