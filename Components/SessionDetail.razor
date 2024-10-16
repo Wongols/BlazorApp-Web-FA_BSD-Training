@@ -64,7 +64,8 @@
 *@
 
                     <button type="submit" class="btn btn-danger" 
-                    @onclick="@(()=> toastService.ShowSuccess("Succesfully updated"))" 
+                    @onclick="@(()=> toastService.ShowError("Succesfully updated"))" 
+                      
                     data-save="modal">Submit</button>&ensp;
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 
