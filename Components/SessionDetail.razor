@@ -10,6 +10,8 @@
 
 
 
+
+
 <div class="modal" tabindex="-1" id="sessionModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -61,13 +63,20 @@
 @*
 <button class="btn btn-info" @onclick="@(()=> toastService.ShowInfo("Info Message"))">Info Toast</button>
 <button class="btn btn-success" @onclick="@(()=> toastService.ShowSuccess("Success Message"))">Success Toast</button>
+
+
+data-dismiss="modal"
 *@
 
                     <button type="submit" class="btn btn-danger" 
+                    data-dismiss="modal"
                     @onclick="@(()=> toastService.ShowError("Succesfully updated"))" 
+                    >Submit</button>&ensp;
+                   
                       
-                    data-save="modal">Submit</button>&ensp;
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-secondary" 
+                    data-dismiss="modal"
+                    >Cancel</button>
 
                     <DataAnnotationsValidator/>
                     <ValidationSummary/>
@@ -82,20 +91,15 @@
 
 @code {
 
-   //  private async Task HideContentAsync() => await SessionObject.HideAsync();
+    //  private async Task HideContentAsync() => await SessionObject.HideAsync();
 
 
     [Parameter]
     public Session SessionObject { get; set; }
-      private async Task HideTaskModal()
+    private async Task HideTaskModal()
     {
 
-    
-
         await jsRuntime.InvokeAsync<object>("HideModal", "sessionModal");
- 
-
-         
 
     }
 
@@ -110,28 +114,42 @@
 
 
 
-  
+
 
     private async void HandleValidSubmit()
 
     {
-       
+
         if(SessionObject.Id==0)
         {
 
             await service.AddSession(SessionObject);
-            await HideTaskModal();
+
         }
         else
 
         {
             await service.EditSession(SessionObject);
-           
+
 
         }
 
-            //await service.AddSession(SessionObject);
-        await HideTaskModal();
+        //await service.AddSession(SessionObject);
+
+
         await OnSave.InvokeAsync(SessionObject);
+        StateHasChanged();
+
+        
+
     }
+
+
+    private async void HandleValidSubmit2()
+
+    {
+            await OnSave.InvokeAsync(SessionObject);
+
+        }
+
 }

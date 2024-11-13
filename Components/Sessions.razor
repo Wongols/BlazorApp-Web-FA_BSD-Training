@@ -14,6 +14,12 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject UserManager<IdentityUser> UserManager
 
+
+<AuthorizeView>
+
+
+<Authorized>
+
     <PageTitle>Sessions</PageTitle>
 <h1>Web Fund Administration BSD Sessions</h1>
 
@@ -22,6 +28,8 @@
 @*
     <Swing Color="#e60000" Size="100px"/>
     *@
+
+
 
 <div>
 <input type="button" data-toggle="modal" data-target="#sessionModal"   class="btn btn-secondary" style='float:right'
@@ -81,6 +89,92 @@ else
 
 }
 <ConfirmDelete OnClick="@DeleteSession"></ConfirmDelete>
+
+</Authorized>
+
+
+<NotAuthorized>
+
+
+    
+    <PageTitle>Sessions</PageTitle>
+<h1>Web Fund Administration BSD Sessions</h1>
+
+<p>This component demonstrates fetching data from a db connected service.</p>
+
+@*
+    <Swing Color="#e60000" Size="100px"/>
+    *@
+
+
+
+
+
+
+
+
+@if (sessions == null)
+{
+    <p><em> <Swing Color="#e60000" Size="100px"/>Loading...</em></p>
+}
+else
+{
+
+ 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Knowledge Base</th>
+                <th>Link IT help ticket</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var session in sessions)
+            {
+                <tr>
+                    <td>@session.Id</td>
+                    <td>@session.Title</td>
+                    <td>@session.Date</td>
+                    <td>@session.Duration</td>
+                    <td>@session.Knowledge_Base</td>
+                    <td>@session.Link_IT_help_ticket</td>
+                    
+                        
+                    
+              @*      <td><input type="button" class="btn btn-danger" value="Delete" data-toggle="modal" data-target="#confirmDeleteModal"
+                        @onclick="(()=>PrepareforDelete(session))" /></td>
+                *@   
+         
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+
+
+<SessionDetail SessionObject="sessionObject" OnSave="@Refreshed">
+    <CustomHeader>@customTitle</CustomHeader>
+
+</SessionDetail>
+
+}
+<ConfirmDelete OnClick="@DeleteSession"></ConfirmDelete>
+
+
+
+
+
+
+ </NotAuthorized>
+
+
+</AuthorizeView>
+
+
 
 @code {
     private List<Session> sessions;
@@ -150,3 +244,5 @@ else
     }
 
 }
+
+
